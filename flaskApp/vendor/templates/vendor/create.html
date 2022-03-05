@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Add New Vendor{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+  <div class="info" style="display: flex; flex-direction: column; max-width: 400px; margin: auto; justify-content: space-between;">
+    <label for="title" style="padding-top: 20px; padding-bottom: 20px;">Vendor Name</label>
+    <input name="title" id="title" value="{{ request.form['title'] }}" required>
+    <label for="body" style="padding-top: 20px; padding-bottom: 20px;">Description</label>
+    <textarea name="body" id="body" style="margin-bottom: 20px">{{ request.form['body'] }}</textarea>
+    <input type="submit" value="Save" style="max-width: 200px; margin: auto">
+      </div>
+  </form>
+{% endblock %}

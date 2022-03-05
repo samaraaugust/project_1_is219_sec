@@ -6,10 +6,12 @@
 
 {% block content %}
   <form method="post">
-    <label for="username">Username</label>
+    <div class="info3" style="display: flex; flex-direction: column; max-width: 400px; margin: auto; justify-content: space-between;">
+    <label for="username" style="padding-top: 20px; padding-bottom: 20px;">Username</label>
     <input name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Register">
+    <label for="password" style="padding-top: 20px; padding-bottom: 20px;">Password</label>
+    <input type="password" name="password" id="password" style="margin-bottom: 20px" required>
+    <input type="submit" value="Register" style="max-width: 200px; margin: auto">
+    </div>
   </form>
 {% endblock %}
