@@ -1,6 +1,10 @@
 import os
 from flask import Flask
-from flaskApp import db, auth, blog, simple_pages
+from flask import render_template
+from flaskApp import db, auth, vendor, simple_pages
+from flaskApp.context_processors import utility_text_processors
+from flask_bootstrap import Bootstrap5
+
 
 
 def create_app(test_config=None):
@@ -32,14 +36,19 @@ def create_app(test_config=None):
     db.init_app(app)
     # apply the blueprints to the app
     app.register_blueprint(auth.bp)
-    app.register_blueprint(blog.bp)
+    app.register_blueprint(vendor.bp)
     app.register_blueprint(simple_pages.bp)
+    bootstrap = Bootstrap5(app)
+    app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'spacelab'
 
-    # make url_for('index') == url_for('blog.index')
+    # make url_for('index') == url_for('vendor.index')
     # in another app, you might define a separate main index here with
-    # app.route, while giving the blog blueprint a url_prefix, but for
-    # the tutorial the blog will be the main index
+    # app.route, while giving the vendor blueprint a url_prefix, but for
+    # the tutorial the vendor will be the main index
     app.add_url_rule("/", endpoint="index")
+    app.context_processor(utility_text_processors)
+
+
     if __name__ == '__main__':
         port = int(os.environ.get("PORT", 5000))
         app.run(host='0.0.0.0', port=port)
@@ -48,5 +57,10 @@ def create_app(test_config=None):
 
 app = create_app()
 
+@app.errorhandler(404)
+# inbuilt function which takes error as parameter
+def not_found(e):
+    # defining function
+    return render_template("404.html")
 
 
