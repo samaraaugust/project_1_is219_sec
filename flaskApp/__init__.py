@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask import render_template
 from flaskApp import db, auth, vendor, simple_pages
-# from flaskApp.context_processors import utility_text_processors
+from flaskApp.context_processors import utility_text_processors
 from flask_bootstrap import Bootstrap5
 
 
@@ -45,7 +45,7 @@ def create_app(test_config=None):
     # app.route, while giving the vendor blueprint a url_prefix, but for
     # the tutorial the vendor will be the main index
     app.add_url_rule("/", endpoint="index")
-    # app.context_processor(utility_text_processors)
+    app.context_processor(utility_text_processors)
 
 
     if __name__ == '__main__':
